@@ -1,0 +1,94 @@
+body {
+    width: 70%;
+    margin: 0 auto;
+    background-image: url('../background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.winner {
+    font-weight: bold;
+}
+.results {
+    width: 100%;
+    background-color: #c6c4c4;
+    padding: 5px;
+    border-radius: 5px;
+}
+.match {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+}
+.match:hover{
+    background-color: #7f7f7f;
+}
+.team-name {
+    display: inline-block;
+    width: 40%;
+}
+.score {
+    display: inline-block;
+    width: 18%;
+    text-align: center; 
+}
+.away {
+    text-align: right;
+}
+.inline-block {
+    display: inline-block;
+}
+#table {
+    width: 100%;
+    background-color: #c6c4c4;
+}
+.team {
+    width: 30%;
+}
+.numbers {
+    width: 7%;
+}
+.competition {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+}
+.flex-container {
+    display: flex;
+}
+.container {
+    width: 50%;
+}
+.a-block {
+    display: block;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: black;
+}
+.float-left {
+    float: left;    
+}
+nav {
+    background-color: #3ebbf9;
+    color: black;
+    overflow: hidden;
+}
+.liga-nav {
+    width: 30%;
+    background-color: gray;
+    font-size: 24px;
+    height: 330px;
+}
+nav a:hover {
+    background-color: #00aaf9;
+}
+.active {
+    background-color: #00aaf9;
+    color: white;
+}
+.table-col {
+    padding: 5px 0;
+}
+div a:hover {
+    background-color: #c6c4c4;
+}
