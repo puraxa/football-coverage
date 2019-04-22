@@ -1,8 +1,7 @@
 let token = '4ab239f4b7de4e06a40b536dc77c3a4a';
 
-let request = (url) => {
+let request = (url) => new Promise((resolve, reject) => {
     let client = new XMLHttpRequest();
-    return new Promise((resolve, reject) => {
         client.open('GET', url, true);
         client.setRequestHeader('X-Auth-Token', token);
         client.send();
@@ -16,11 +15,10 @@ let request = (url) => {
                 reject(new Error(error.message));
             }
         }
-    })
-}
+})
 
 function handleError(error){
-    console.log(error);
+    //TODO zavrsi ispis
 }
 
 
