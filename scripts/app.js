@@ -31,7 +31,7 @@ function showMatch(data, id) {
         if(data.matches[i].score.fullTime.homeTeam == null || data.matches[i].score.fullTime.awayTeam == null){
             html += `
                 <div id="${data.matches[i].id}" class="match" onclick="request('http://api.football-data.org/v2/matches/${data.matches[i].id}',detailed)">
-                    <div class="winner team-name">
+                    <div class="team-name">
                         ${data.matches[i].homeTeam.name}
                     </div>
                     <div class="score">
