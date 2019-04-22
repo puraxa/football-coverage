@@ -1,6 +1,6 @@
 let token = '4ab239f4b7de4e06a40b536dc77c3a4a';
 
-function request(url){
+let request = (url) => {
     let client = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
         client.open('GET', url, true);
@@ -17,14 +17,14 @@ function request(url){
             }
         }
     })
-//    .then(callback)
-//    .catch(handleError);
 }
 
 function handleError(error){
     console.log(error);
 }
 
+
+//display match results
 function showMatch(data, id) {
     let html = '';
     for(let i = 0; i < data.matches.length; i++){
@@ -91,7 +91,7 @@ function showMatch(data, id) {
         }
     document.getElementById(id).innerHTML += html;
 }
-
+//promise chain getting and displaying results by league
 function loadResults(){
     request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33')
     .then((data) => showMatch(data,'spain'))
@@ -105,7 +105,7 @@ function loadResults(){
     .then((data) => showMatch(data,'france')))
     .catch(handleError);
 }
-
+//promise chain getting and displaying standings by league
 function loadTables(){
     request('http://api.football-data.org/v2/competitions/PD/standings')
     .then((data) => showStandings(data,'spain'))
@@ -119,7 +119,7 @@ function loadTables(){
     .then((data) => showStandings(data,'france')))
     .catch(handleError);
 }
-
+// display standings
 function showStandings(data, id){
     console.log(data);
     let standings = '';
@@ -152,7 +152,7 @@ function showStandings(data, id){
     }
     document.getElementById(id).innerHTML += standings;
 }
-
+// display details about selected club
 function detailed(data) {
     let display = '';
     display += `
@@ -188,7 +188,7 @@ function detailed(data) {
     }
     document.getElementById('team-details').innerHTML = display;
 }
-
+//gets team from choosen league
 function listTeams(){
     request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`)
     .then(optionTeams)

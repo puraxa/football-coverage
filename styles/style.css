@@ -38,10 +38,6 @@ body {
 .inline-block {
     display: inline-block;
 }
-#table {
-    width: 100%;
-    background-color: #c6c4c4;
-}
 .team {
     width: 30%;
 }
