@@ -12,7 +12,8 @@ body {
     width: 100%;
     background-color: #c6c4c4;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
+    margin-bottom: 50px;
 }
 .match {
     display: block;
@@ -78,6 +79,7 @@ nav {
     background-color: gray;
     font-size: 24px;
     height: 330px;
+    border-bottom-left-radius: 5px;
 }
 nav a:hover {
     background-color: #00aaf9;
@@ -91,4 +93,31 @@ nav a:hover {
 }
 div a:hover {
     background-color: #c6c4c4;
+}
+.detailed-team {
+    width: 100%;
+    background-color: #c6c4c4;
+    padding: 10px 0;
+    border-radius: 0 0 5px 5px;
+}
+.show-none {
+    display: none;
+}
+.team-select-height {
+    height: 200px;
+}
+.club-info {
+    display: inline-block;
+    padding: 25px;
+    font-size: 24px;
+}
+.player-info {
+    padding: 10px 0;
+    clear: both;
+    display: inline-block;
+    width: 23%;
+}
+#club-details{
+    width: 100%;
+    height: 450px;
 }

@@ -153,6 +153,67 @@ function showStandings(data, id){
     document.getElementById(id).innerHTML += standings;
 }
 
-function detailed(data){
-    console.log(data);
+function detailed(data) {
+    let display = '';
+    display += `
+    <div id="club-details">
+        <img src="${data.crestUrl}" height=400 alt="${data.name} crest" class="float-left">
+        <div class="club-info">Club name: ${data.name}</div><br>
+        <div class="club-info">Club short name: ${data.shortName}</div><br>
+        <div class="club-info">Website: <a href="${data.website}" target="_blank">${data.website}</a></div><br>
+        <div class="club-info">Founded: ${data.founded}</div><br>
+        <div class="club-info">Venue: ${data.venue}</div><br>
+    </div>
+    <div class="player-info winner">Player name</div>
+    <div class="player-info winner">Position</div>
+    <div class="player-info winner">Date of birth</div>
+    <div class="player-info winner">Nationality</div>
+    `;
+    for (let i = 0; i < data.squad.length; i++) {
+        display += `
+            <div class="player-info">${data.squad[i].name}</div>
+            `;
+        if (data.squad[i].role == 'COACH') {
+            display += `
+            <div class="player-info">Coach</div>`;
+        } else {
+            display += `
+            <div class="player-info">${data.squad[i].position}</div>
+            `;
+            }
+        display += `
+            <div class="player-info">${showDate(data.squad[i].dateOfBirth)}</div>
+            <div class="player-info">${data.squad[i].nationality}</div>
+        `;
+    }
+    document.getElementById('team-details').innerHTML = display;
+}
+
+function listTeams(){
+    request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`)
+    .then(optionTeams)
+    .then(() => document.getElementById('select-team').style.display = 'block')
+    .catch(handleError);
+}
+
+function optionTeams(data) {
+    let display = '';
+    for(let i = 0; i < data.teams.length; i++){
+    display +=`
+        <option value="${data.teams[i].id}">${data.teams[i].name}</option>
+    `;
+    }
+    document.getElementById('teams').innerHTML = display;
+}
+
+function showTeamDetailed(){
+    request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`)
+    .then(detailed)
+    .catch(handleError);
+}
+
+function showDate(date){
+    let newDate = new Date(date);
+    console.log(newDate);
+    return `${newDate.getDate()}.${newDate.getMonth()+1}.${newDate.getUTCFullYear()}`;
 }
