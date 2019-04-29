@@ -226,11 +226,18 @@ function detailed(data) {
     document.getElementById('team-details').innerHTML = display;
 }
 //gets team from choosen league
-function listTeams(){
-    request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`)
-    .then(optionTeams)
-    .then(() => document.getElementById('select-team').style.display = 'block')
-    .catch(handleError);
+async function listTeams(){
+    try {
+        let data = await request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`);
+        optionTeams(data);
+        document.getElementById('select-team').style.display = 'block';
+    } catch(err) {
+        console.log(err);
+    }
+    // request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`)
+    // .then(optionTeams)
+    // .then(() => document.getElementById('select-team').style.display = 'block')
+    // .catch(handleError);
 }
 
 function optionTeams(data) {
@@ -243,14 +250,20 @@ function optionTeams(data) {
     document.getElementById('teams').innerHTML = display;
 }
 
-function showTeamDetailed(){
-    request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`)
-    .then(detailed)
-    .catch(handleError);
+async function showTeamDetailed(){
+    try{
+        let data = await request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`);
+        detailed(data);
+    } catch(err) {
+        console.log(err);
+    }
+
+    // request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`)
+    // .then(detailed)
+    // .catch(handleError);
 }
 
 function showDate(date){
     let newDate = new Date(date);
-    console.log(newDate);
     return `${newDate.getDate()}.${newDate.getMonth()+1}.${newDate.getUTCFullYear()}`;
 }
