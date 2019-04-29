@@ -6,7 +6,7 @@ let fetchOptions = {
         "X-Auth-Token": token,
     }    
 }
-let request = async(url) => {
+const request = async(url) => {
     const response = await fetch(url,fetchOptions);
     const data = await response.json();
     return data;
