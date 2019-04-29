@@ -1,21 +1,32 @@
 let token = '4ab239f4b7de4e06a40b536dc77c3a4a';
-
-let request = (url) => new Promise((resolve, reject) => {
-    let client = new XMLHttpRequest();
-        client.open('GET', url, true);
-        client.setRequestHeader('X-Auth-Token', token);
-        client.send();
-        client.onreadystatechange = () => {
-            if(client.readyState == 4 && client.status == 200){
-                let data = JSON.parse(client.responseText);
-                resolve(data);
-            }
-            if(client.readyState == 4 && client.status != 200){
-                let error = JSON.parse(client.responseText);
-                reject(new Error(error.message));
-            }
-        }
-})
+let fetchOptions = {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+        "X-Auth-Token": token,
+    }    
+}
+let request = async(url) => {
+        let response = await fetch(url,fetchOptions);
+        const data = await response.json();
+        return data;
+}
+// let request = (url) => new Promise((resolve, reject) => {
+//     let client = new XMLHttpRequest();
+//         client.open('GET', url, true);
+//         client.setRequestHeader('X-Auth-Token', token);
+//         client.send();
+//         client.onreadystatechange = () => {
+//             if(client.readyState == 4 && client.status == 200){
+//                 let data = JSON.parse(client.responseText);
+//                 resolve(data);
+//             }
+//             if(client.readyState == 4 && client.status != 200){
+//                 let error = JSON.parse(client.responseText);
+//                 reject(new Error(error.message));
+//             }
+//         }
+// });
 
 function handleError(error){
     //TODO zavrsi ispis
@@ -90,36 +101,64 @@ function showMatch(data, id) {
     document.getElementById(id).innerHTML += html;
 }
 //promise chain getting and displaying results by league
-function loadResults(){
-    request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33')
-    .then((data) => showMatch(data,'spain'))
-    .then(request('http://api.football-data.org/v2/competitions/PL/matches/?matchday=34')
-    .then((data) => showMatch(data,'england')))
-    .then(request('http://api.football-data.org/v2/competitions/BL1/matches/?matchday=29')
-    .then((data) => showMatch(data,'germany')))
-    .then(request('http://api.football-data.org/v2/competitions/SA/matches/?matchday=33')
-    .then((data) => showMatch(data,'italy')))
-    .then(request('http://api.football-data.org/v2/competitions/FL1/matches/?matchday=32')
-    .then((data) => showMatch(data,'france')))
-    .catch(handleError);
+async function loadResults(){
+    try{
+        let data = await request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33');
+        showMatch(data,'spain');
+        data = await request('http://api.football-data.org/v2/competitions/PL/matches/?matchday=34');
+        showMatch(data, 'england');
+        data = await request('http://api.football-data.org/v2/competitions/BL1/matches/?matchday=29');
+        showMatch(data,'germany');
+        data = await request('http://api.football-data.org/v2/competitions/SA/matches/?matchday=33');
+        showMatch(data, 'italy');
+        data = await request('http://api.football-data.org/v2/competitions/FL1/matches/?matchday=32');
+        showMatch(data,'france');
+    }
+    catch (err) {
+        console.log(err);
+    }
+    // request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33')
+    // .then((data) => showMatch(data,'spain'))
+    // .then(request('http://api.football-data.org/v2/competitions/PL/matches/?matchday=34')
+    // .then((data) => showMatch(data,'england')))
+    // .then(request('http://api.football-data.org/v2/competitions/BL1/matches/?matchday=29')
+    // .then((data) => showMatch(data,'germany')))
+    // .then(request('http://api.football-data.org/v2/competitions/SA/matches/?matchday=33')
+    // .then((data) => showMatch(data,'italy')))
+    // .then(request('http://api.football-data.org/v2/competitions/FL1/matches/?matchday=32')
+    // .then((data) => showMatch(data,'france')))
+    // .catch(handleError);
 }
 //promise chain getting and displaying standings by league
-function loadTables(){
-    request('http://api.football-data.org/v2/competitions/PD/standings')
-    .then((data) => showStandings(data,'spain'))
-    .then(request('http://api.football-data.org/v2/competitions/PL/standings')
-    .then((data) => showStandings(data,'england')))
-    .then(request('http://api.football-data.org/v2/competitions/BL1/standings')
-    .then((data) => showStandings(data,'germany')))
-    .then(request('http://api.football-data.org/v2/competitions/SA/standings')
-    .then((data) => showStandings(data,'italy')))
-    .then(request('http://api.football-data.org/v2/competitions/FL1/standings')
-    .then((data) => showStandings(data,'france')))
-    .catch(handleError);
+async function loadTables(){
+    try{
+        let data = await request('http://api.football-data.org/v2/competitions/PD/standings');
+        showStandings(data, 'spain');
+        data = await request('http://api.football-data.org/v2/competitions/PL/standings');
+        showStandings(data, 'england');
+        data = await request('http://api.football-data.org/v2/competitions/BL1/standings');
+        showStandings(data, 'germany');
+        data = await request('http://api.football-data.org/v2/competitions/SA/standings');
+        showStandings(data, 'italy');
+        data = await request('http://api.football-data.org/v2/competitions/FL1/standings');
+        showStandings(data, 'france');
+    } catch(err) {
+        console.log(err);
+    }
+    // request('http://api.football-data.org/v2/competitions/PD/standings')
+    // .then((data) => showStandings(data,'spain'))
+    // .then(request('http://api.football-data.org/v2/competitions/PL/standings')
+    // .then((data) => showStandings(data,'england')))
+    // .then(request('http://api.football-data.org/v2/competitions/BL1/standings')
+    // .then((data) => showStandings(data,'germany')))
+    // .then(request('http://api.football-data.org/v2/competitions/SA/standings')
+    // .then((data) => showStandings(data,'italy')))
+    // .then(request('http://api.football-data.org/v2/competitions/FL1/standings')
+    // .then((data) => showStandings(data,'france')))
+    // .catch(handleError);
 }
 // display standings
 function showStandings(data, id){
-    console.log(data);
     let standings = '';
     standings += `
     <div class="numbers inline-block">Pos</div>
