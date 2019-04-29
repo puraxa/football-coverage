@@ -7,9 +7,9 @@ let fetchOptions = {
     }    
 }
 let request = async(url) => {
-        let response = await fetch(url,fetchOptions);
-        const data = await response.json();
-        return data;
+    const response = await fetch(url,fetchOptions);
+    const data = await response.json();
+    return data;
 }
 // let request = (url) => new Promise((resolve, reject) => {
 //     let client = new XMLHttpRequest();
