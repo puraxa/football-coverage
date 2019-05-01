@@ -14,6 +14,7 @@ const request = async(url) => {
 
 function handleError(error){
     //TODO zavrsi ispis
+    location.href = "./error.html";
 }
 
 
@@ -99,7 +100,7 @@ async function loadResults(){
         showMatch(data,'france');
     }
     catch (err) {
-        console.log(err);
+        handleError(err);
     }
 }
 //promise chain getting and displaying standings by league
@@ -116,7 +117,7 @@ async function loadTables(){
         data = await request('http://api.football-data.org/v2/competitions/FL1/standings');
         showStandings(data, 'france');
     } catch(err) {
-        console.log(err);
+        handleError(err);
     }
 }
 // display standings
@@ -194,7 +195,7 @@ async function listTeams(){
         optionTeams(data);
         document.getElementById('select-team').style.display = 'block';
     } catch(err) {
-        console.log(err);
+        handleError(err);
     }
 }
 
@@ -213,7 +214,7 @@ async function showTeamDetailed(){
         let data = await request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`);
         detailed(data);
     } catch(err) {
-        console.log(err);
+        handleError(err);
     }
 }
 
