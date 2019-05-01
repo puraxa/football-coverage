@@ -1,3 +1,4 @@
+console.log(location.pathname);
 let token = '4ab239f4b7de4e06a40b536dc77c3a4a';
 let fetchOptions = {
     method: 'GET',
@@ -13,8 +14,12 @@ const request = async(url) => {
 }
 
 function handleError(error){
-    //TODO zavrsi ispis
-    location.href = "./error.html";
+    if(location.pathname == '/index.html'){
+        location.href = './pages/error.html';
+    }
+    else {
+        location.href = './error.html';
+    }
 }
 
 
