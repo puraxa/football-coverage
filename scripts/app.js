@@ -1,4 +1,3 @@
-console.log(location.pathname);
 let token = '4ab239f4b7de4e06a40b536dc77c3a4a';
 let fetchOptions = {
     method: 'GET',
