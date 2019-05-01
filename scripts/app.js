@@ -11,22 +11,6 @@ const request = async(url) => {
     const data = await response.json();
     return data;
 }
-// let request = (url) => new Promise((resolve, reject) => {
-//     let client = new XMLHttpRequest();
-//         client.open('GET', url, true);
-//         client.setRequestHeader('X-Auth-Token', token);
-//         client.send();
-//         client.onreadystatechange = () => {
-//             if(client.readyState == 4 && client.status == 200){
-//                 let data = JSON.parse(client.responseText);
-//                 resolve(data);
-//             }
-//             if(client.readyState == 4 && client.status != 200){
-//                 let error = JSON.parse(client.responseText);
-//                 reject(new Error(error.message));
-//             }
-//         }
-// });
 
 function handleError(error){
     //TODO zavrsi ispis
@@ -117,17 +101,6 @@ async function loadResults(){
     catch (err) {
         console.log(err);
     }
-    // request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33')
-    // .then((data) => showMatch(data,'spain'))
-    // .then(request('http://api.football-data.org/v2/competitions/PL/matches/?matchday=34')
-    // .then((data) => showMatch(data,'england')))
-    // .then(request('http://api.football-data.org/v2/competitions/BL1/matches/?matchday=29')
-    // .then((data) => showMatch(data,'germany')))
-    // .then(request('http://api.football-data.org/v2/competitions/SA/matches/?matchday=33')
-    // .then((data) => showMatch(data,'italy')))
-    // .then(request('http://api.football-data.org/v2/competitions/FL1/matches/?matchday=32')
-    // .then((data) => showMatch(data,'france')))
-    // .catch(handleError);
 }
 //promise chain getting and displaying standings by league
 async function loadTables(){
@@ -145,17 +118,6 @@ async function loadTables(){
     } catch(err) {
         console.log(err);
     }
-    // request('http://api.football-data.org/v2/competitions/PD/standings')
-    // .then((data) => showStandings(data,'spain'))
-    // .then(request('http://api.football-data.org/v2/competitions/PL/standings')
-    // .then((data) => showStandings(data,'england')))
-    // .then(request('http://api.football-data.org/v2/competitions/BL1/standings')
-    // .then((data) => showStandings(data,'germany')))
-    // .then(request('http://api.football-data.org/v2/competitions/SA/standings')
-    // .then((data) => showStandings(data,'italy')))
-    // .then(request('http://api.football-data.org/v2/competitions/FL1/standings')
-    // .then((data) => showStandings(data,'france')))
-    // .catch(handleError);
 }
 // display standings
 function showStandings(data, id){
@@ -234,10 +196,6 @@ async function listTeams(){
     } catch(err) {
         console.log(err);
     }
-    // request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`)
-    // .then(optionTeams)
-    // .then(() => document.getElementById('select-team').style.display = 'block')
-    // .catch(handleError);
 }
 
 function optionTeams(data) {
@@ -257,10 +215,6 @@ async function showTeamDetailed(){
     } catch(err) {
         console.log(err);
     }
-
-    // request(`http://api.football-data.org/v2/teams/${document.getElementById('teams').value}`)
-    // .then(detailed)
-    // .catch(handleError);
 }
 
 function showDate(date){
