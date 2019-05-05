@@ -9,50 +9,18 @@
         <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body onload="loadResults()">
-        <nav>
-            <a href="#" class="a-block float-left active">Results</a>
-            <a href="./pages/table.html" class="a-block float-left">Tables</a>
-            <a href="./pages/team.html" class="a-block float-left">Team</a>
-        </nav>
-        <div class="flex-container">
-            <div class="liga-nav">
-                <a href="#laliga" class="a-block">La Liga</a>
-                <a href="#epl" class="a-block">English Premier League</a>
-                <a href="#bl" class="a-block">Bundesliga</a>
-                <a href="#seriea" class="a-block">Seria A</a>
-                <a href="#ligue1" class="a-block">Ligue 1</a>
-            </div>
-            <div class="results">
-                <h1 class="competition" id="laliga">La Liga</h1>
-                <div id="spain"></div>
-                <h1 class="competition" id="epl">English Premier League</h1>
-                <div id="england"></div>
-                <h1 class="competition" id="bl">Bundesliga</h1>
-                <div id="germany"></div>
-                <h1 class="competition" id="seriea">Serie A</h1>
-                <div id="italy"></div>
-                <h1 class="competition" id="ligue1">Ligue 1</h1>
-                <div id="france"></div>
+        <div class="wrapper">
+            <nav>
+                <a href="#" class="a-block float-left active">Results</a>
+                <a href="./pages/table.html" class="a-block float-left">Tables</a>
+                <a href="./pages/team.html" class="a-block float-left">Team</a>
+            </nav>
+            <div class="flex-container">
+                <div class="liga-nav dis-none bg-gray border-bottom-left" id="league-nav">
+                </div>
+                <div class="results bg-lightgray">
+                </div>
             </div>
         </div>
-
-                <!-- <h1 class="competition">🇪🇸 Spanish La Liga</h1>
-                <div class="flex-container">
-                        <div class="container"> 
-
-                <div id="results"></div>
-            </div>
-            <div class="container" style="padding-left:15px;">
-                    <div id="table">
-                            <div class="numbers inline-block">Pos</div>
-                            <div class="team inline-block">Team</div>
-                            <div class="numbers inline-block">PG</div>
-                            <div class="numbers inline-block">W</div>
-                            <div class="numbers inline-block">D</div>
-                            <div class="numbers inline-block">L</div>
-                            <div class="numbers inline-block">PTS</div>
-                        </div>
-            </div>
-        </div> -->
     </body>
 </html>

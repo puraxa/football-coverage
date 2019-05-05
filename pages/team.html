@@ -9,30 +9,32 @@
         <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body onload="listTeams()">
-        <nav>
-            <a href="../index.html" class="a-block float-left">Results</a>
-            <a href="./table.html" class="a-block float-left">Tables</a>
-            <a href="#" class="a-block float-left active">Team</a>
-        </nav>
-        <div class="flex-container">
-            <div class="liga-nav team-select-height">
-                <div>
-                    <span>Choose league: </span>
-                    <select name="league" id="league" onchange="listTeams()">
-                        <option value="PD">La Liga</option>
-                        <option value="PL">English Premier League</option>
-                        <option value="BL1">Bundesliga</option>
-                        <option value="SA">Serie A</option>
-                        <option value="FL1">Ligue 1</option>
-                    </select>
+        <div class="wrapper">
+            <nav>
+                <a href="../index.html" class="a-block float-left">Results</a>
+                <a href="./table.html" class="a-block float-left">Tables</a>
+                <a href="#" class="a-block float-left active">Team</a>
+            </nav>
+            <div class="flex-container">
+                <div class="liga-nav team-select-height">
+                    <div>
+                        <span>Choose league: </span>
+                        <select name="league" id="league" onchange="listTeams()">
+                            <option value="PD">La Liga</option>
+                            <option value="PL">English Premier League</option>
+                            <option value="BL1">Bundesliga</option>
+                            <option value="SA">Serie A</option>
+                            <option value="FL1">Ligue 1</option>
+                        </select>
+                    </div>
+                    <div id="select-team" class="show-none">
+                        <span>Choose team:</span>
+                        <select name="teams" id="teams"></select>
+                        <button onclick="showTeamDetailed()">Show</button>
+                    </div>
                 </div>
-                <div id="select-team" class="show-none">
-                    <span>Choose team:</span>
-                    <select name="teams" id="teams"></select>
-                    <button onclick="showTeamDetailed()">Show</button>
-                </div>
+                <div class="results" id="team-details"></div>
             </div>
-            <div class="results" id="team-details"></div>
         </div>
     </body>
 </html>
