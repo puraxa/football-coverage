@@ -221,9 +221,7 @@ function detailed(data) {
 async function loadTeams(){
     try{
         let data = await request('http://api.football-data.org/v2/competitions/?plan=TIER_ONE');
-        console.log(data);
         parseData(data);
-        console.log(competitions);
         optionLeague(competitions);
         listTeams();
     } catch(err) {
@@ -234,7 +232,6 @@ async function loadTeams(){
 async function listTeams(){
     try {
         let data = await request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`);
-        console.log(data);
         optionTeams(data);
         document.getElementById('select-team').style.display = 'block';
     } catch(err) {
