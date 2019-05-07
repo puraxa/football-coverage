@@ -16,7 +16,6 @@ const request = async(url) => {
 
 function handleError(error){
     document.getElementsByClassName('results')[0].innerHTML = `${error.message}`;
-    console.log(document.getElementsByClassName('results'));
     document.getElementsByClassName('results')[0].classList.add('error');
     document.getElementsByClassName('results')[0].classList.add('text-align-center');
     document.getElementsByClassName('liga-nav')[0].style.display = 'none';
@@ -48,11 +47,20 @@ function showMatch(data) {
                 </div>
             `;
         }
-        html += `
-                    <div class="match-result inline-block float-left">
-                        ${data.matches[i].score.fullTime.homeTeam}
-                    </div>
+        if(data.matches[i].score.fullTime.homeTeam == null){
+            html += `
+            <div class="match-result inline-block float-left">
+                NOT
+            </div>
             `;
+        }
+        else{
+            html += `
+                        <div class="match-result inline-block float-left">
+                            ${data.matches[i].score.fullTime.homeTeam}
+                        </div>
+                `;
+        }
         if(data.matches[i].score.winner == 'AWAY_TEAM'){
             html += `
                 <div class="team-name inline-block float-left bold">
@@ -67,12 +75,22 @@ function showMatch(data) {
                 </div>
             `;
         }
-        html += `
+        if(data.matches[i].score.fullTime.awayTeam == null){
+            html += `
                 <div class="match-result inline-block float-left">
-                    ${data.matches[i].score.fullTime.awayTeam}
+                    PLAYED
                 </div>
-            </div><hr>
-        `;
+                </div><hr>
+            `;
+        }
+        else{
+            html += `
+                    <div class="match-result inline-block float-left">
+                        ${data.matches[i].score.fullTime.awayTeam}
+                    </div>
+                </div><hr>
+            `;
+        }
     }
     document.getElementsByClassName('results')[0].innerHTML += html;
 }
@@ -86,25 +104,12 @@ async function loadResults(){
         for(let i = 0; i < competitions.length; i++){
             if(competitions[i].leagueName != 'UEFA Champions League' && competitions[i].leagueName != 'European Championship' && competitions[i].leagueName != 'FIFA World Cup'){
                 arr.push(request(`http://api.football-data.org/v2/competitions/${competitions[i].leagueID}/matches/?matchday=${competitions[i].currentMatchDay}`));
-                //data = await request(`http://api.football-data.org/v2/competitions/${competitions[i].leagueID}/matches/?matchday=${competitions[i].currentMatchDay}`);
-                //showMatch(data);
             }
         }
         data = await Promise.all(arr);
-        console.log(data);
         for(let i = 0; i < data.length; i++){
             showMatch(data[i]);
         }
-        // data = await request('http://api.football-data.org/v2/competitions/PD/matches/?matchday=33');
-        // showMatch(data,'spain');
-        // data = await request('http://api.football-data.org/v2/competitions/PL/matches/?matchday=34');
-        // showMatch(data, 'england');
-        // data = await request('http://api.football-data.org/v2/competitions/BL1/matches/?matchday=29');
-        // showMatch(data,'germany');
-        // data = await request('http://api.football-data.org/v2/competitions/SA/matches/?matchday=33');
-        // showMatch(data, 'italy');
-        // data = await request('http://api.football-data.org/v2/competitions/FL1/matches/?matchday=32');
-        // showMatch(data,'france');
     }
     catch (err) {
         handleError(err);
@@ -138,8 +143,6 @@ async function loadTables(){
         for(let i = 0; i < competitions.length; i++){
             if(competitions[i].leagueName != 'UEFA Champions League' && competitions[i].leagueName != 'European Championship' && competitions[i].leagueName != 'FIFA World Cup'){
                 arr.push(request(`http://api.football-data.org/v2/competitions/${competitions[i].leagueID}/standings`));
-                //data = await request(`http://api.football-data.org/v2/competitions/${competitions[i].leagueID}/standings`);
-                //showStandings(data);
             }
         }
         data = await Promise.all(arr);
@@ -182,46 +185,73 @@ function detailed(data) {
     let display = '';
     display += `
     <div id="club-details">
-        <img src="${data.crestUrl}" height=400 alt="${data.name} crest" class="float-left">
-        <div class="club-info">Club name: ${data.name}</div><br>
-        <div class="club-info">Club short name: ${data.shortName}</div><br>
-        <div class="club-info">Website: <a href="${data.website}" target="_blank">${data.website}</a></div><br>
-        <div class="club-info">Founded: ${data.founded}</div><br>
-        <div class="club-info">Venue: ${data.venue}</div><br>
+        <img src="${data.crestUrl}" alt="${data.name} crest" class="club-crest">
+        <div>
+        <div class="club-info inline-block">Club name: ${data.name}</div><br>
+        <div class="club-info inline-block">Club short name: ${data.shortName}</div><br>
+        <div class="club-info inline-block">Website: <a href="${data.website}" target="_blank">${data.website}</a></div><br>
+        <div class="club-info inline-block">Founded: ${data.founded}</div><br>
+        <div class="club-info inline-block">Venue: ${data.venue}</div><br>
+        </div>
     </div>
-    <div class="player-info winner">Player name</div>
-    <div class="player-info winner">Position</div>
-    <div class="player-info winner">Date of birth</div>
-    <div class="player-info winner">Nationality</div>
+    <div class="player-info winner inline-block">Player name</div>
+    <div class="player-info winner inline-block">Position</div>
+    <div class="player-info winner inline-block dis-none">Date of birth</div>
+    <div class="player-info winner inline-block">Nationality</div>
     `;
     for (let i = 0; i < data.squad.length; i++) {
         display += `
-            <div class="player-info">${data.squad[i].name}</div>
+            <div class="player-info inline-block">${data.squad[i].name}</div>
             `;
         if (data.squad[i].role == 'COACH') {
             display += `
-            <div class="player-info">Coach</div>`;
+            <div class="player-info inline-block">Coach</div>`;
         } else {
             display += `
-            <div class="player-info">${data.squad[i].position}</div>
+            <div class="player-info inline-block">${data.squad[i].position}</div>
             `;
             }
         display += `
-            <div class="player-info">${showDate(data.squad[i].dateOfBirth)}</div>
-            <div class="player-info">${data.squad[i].nationality}</div>
+            <div class="player-info inline-block dis-none">${showDate(data.squad[i].dateOfBirth)}</div>
+            <div class="player-info inline-block">${data.squad[i].nationality}</div>
         `;
     }
     document.getElementById('team-details').innerHTML = display;
+}
+async function loadTeams(){
+    try{
+        let data = await request('http://api.football-data.org/v2/competitions/?plan=TIER_ONE');
+        console.log(data);
+        parseData(data);
+        console.log(competitions);
+        optionLeague(competitions);
+        listTeams();
+    } catch(err) {
+        handleError(err);
+    }
 }
 //gets team from choosen league
 async function listTeams(){
     try {
         let data = await request(`http://api.football-data.org/v2/competitions/${document.getElementById('league').value}/teams`);
+        console.log(data);
         optionTeams(data);
         document.getElementById('select-team').style.display = 'block';
     } catch(err) {
         handleError(err);
     }
+}
+
+function optionLeague(data) {
+    let html = ``;
+    for(let i = 0; i < data.length; i++){
+        if(competitions[i].leagueName != 'UEFA Champions League' && competitions[i].leagueName != 'European Championship' && competitions[i].leagueName != 'FIFA World Cup'){
+            html += `
+                <option value="${data[i].leagueID}">${data[i].leagueName}</option>
+            `;
+        }
+    }
+    document.getElementById('league').innerHTML = html;
 }
 
 function optionTeams(data) {
