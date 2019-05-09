@@ -1,0 +1,27 @@
+{
+  "name": "football-coverage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/scripts/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puraxa/football-coverage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puraxa/football-coverage/issues"
+  },
+  "homepage": "https://github.com/puraxa/football-coverage#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-html-minifier2": "^1.1.11",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^1.0.4"
+  },
+  "dependencies": {}
+}
