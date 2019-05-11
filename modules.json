@@ -1,0 +1,12 @@
+{
+    "app": [
+        "./app/scripts/app.js",
+        "./app/scripts/handleError.mjs",
+        "./app/scripts/leagueNav.mjs",
+        "./app/scripts/parseData.mjs",
+        "./app/scripts/request.mjs",
+        "./app/scripts/results.mjs",
+        "./app/scripts/tables.mjs",
+        "./app/scripts/team.mjs"
+    ]
+}
