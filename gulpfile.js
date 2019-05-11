@@ -28,6 +28,7 @@ gulp.task('build', async function(){
     gulp.src('./modules.json')
         .pipe(builder())
         .pipe(replace(/.*\b(import|export {|window).*|export /gi,""))
+        .pipe(uglify())
         .pipe(gulp.dest('dist/scripts'))
 })
 
